@@ -13,6 +13,7 @@
 # File name notation
 # .py should be "py folder"
 import os
+import shutil
 
 def main():
     path_to_fold = input("Path: ")
@@ -23,23 +24,27 @@ def main():
         for path_item in os.listdir(path_to_fold):
             filename, file_extension = os.path.splitext(path_item)
             
-            # getting the extension folder if it exists
+            # the path to the extension folder (regardless as to whether it exists)
             extfolder = os.path.join(path_to_fold, f"{file_extension} folder")
+            
             print(f"{filename}, {file_extension}") # TEMP
             
+            # path_item =\= file_path
+            # This is for the file_path, which links to the item in question
+            file_path = os.path.join(path_to_fold, path_item)
             if os.path.exists(extfolder):
-                move_file(path_item, extfolder)
+                move_file(file_path, extfolder)
             else:
-                make_folder(path_to_fold, extfolder)
-                move_file(path_item, extfolder)
+                make_folder(extfolder) # makes the external folder
+                move_file(file_path, extfolder)
 
 # moves the file from the file_path to the folder_path
 def move_file(file_path, fold_path) -> None:
-    pass
+    shutil.move(file_path, fold_path)
 
 # makes folder with name of fold_name, at fold_path
-def make_folder(fold_path, fold_name) -> None:
-    pass
+def make_folder(fold_name) -> None:
+    os.mkdir(fold_name)
 
 
 if __name__ == "__main__":
