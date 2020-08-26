@@ -26,7 +26,9 @@ def main():
             
             # the path to the extension folder (regardless as to whether it exists)
             extfolder = os.path.join(path_to_fold, f"{file_extension} folder")
-            
+            if file_extension == '': # This is for folders, to prevent putting folders in folders
+                continue
+
             print(f"{filename}, {file_extension}") # TEMP
             
             # path_item =\= file_path
